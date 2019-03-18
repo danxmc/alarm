@@ -11,7 +11,6 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addAction } from '../actions/actionActions';
-import uuid from 'uuid';
 
 class ActionModal extends Component {
     state = {
@@ -33,7 +32,6 @@ class ActionModal extends Component {
         e.preventDefault();
 
         const newAction = {
-            id: uuid(),
             type: this.state.type
         }
 

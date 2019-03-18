@@ -10,7 +10,7 @@ const Action = require('../../models/Action');
 router.get('/', (req, res) => {
     Action.find().sort({
         date: -1
-    }).then(items => res.json(items));
+    }).then(actions => res.json(actions));
 });
 
 // @route   POST api/actions
@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
 // @access  Private
 router.delete('/:id', (req, res) => {
     Action.findById(req.params.id)
-    .then(item => item.remove()
+    .then(action => action.remove()
     .then(() => res.json({
         success: true
     })))
