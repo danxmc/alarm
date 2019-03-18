@@ -2,19 +2,18 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import uuid from 'uuid';
+import { connect } from 'react-redux';
+import { getActions } from '../actions/actionActions';
+import PropTypes from 'prop-types';
 
 class ActionList extends Component {
-    state = {
-        items: [
-            {id: uuid(), type: 'activado'},
-            {id: uuid(), type: 'desactivado'},
-            {id: uuid(), type: 'activado'},
-            {id: uuid(), type: 'desactivado'}
-        ]
-    }
 
+    componentDidMount() {
+        this.props.getActions();
+    }
+    
     render() {
-        const { items } = this.state;
+        const { actions } = this.props.action;
         return(
             <Container>
                 <Button 
@@ -24,7 +23,7 @@ class ActionList extends Component {
                     const type = prompt('Enter Action');
                     if(type) {
                         this.setState(state => ({
-                            items: [...state.items, { id: uuid(), type }]
+                            items: [...state.actions, { id: uuid(), type }]
                         }));
                     }
                 }}
@@ -32,7 +31,7 @@ class ActionList extends Component {
 
                 <ListGroup>
                     <TransitionGroup className='action-list'>
-                        {items.map(({ id, type }) => (
+                        {actions.map(({ id, type }) => (
                             <CSSTransition key={id} timeout={500} classNames='fade'>
                                 <ListGroupItem>
                                     <Button
@@ -41,7 +40,7 @@ class ActionList extends Component {
                                         size="sm"
                                         onClick={() => {
                                             this.setState(state => ({
-                                                items: state.items.filter(item => item.id !== id)
+                                                actions: state.actions.filter(action => action.id !== id)
                                             }));
                                         }}
                                     >&times;</Button>
@@ -56,4 +55,13 @@ class ActionList extends Component {
     }
 }
 
-export default ActionList;
+ActionList.propTypes = {
+    getActions: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    action: state.action
+});
+
+export default connect(mapStateToProps, { getActions })(ActionList);
