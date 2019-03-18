@@ -5,3 +5,17 @@ export const getActions = () => {
         type: GET_ACTIONS
     }
 }
+
+export const deleteAction = id => {
+    return {
+        type: DELETE_ACTION,
+        payload: id
+    }
+}
+
+export const addAction = action => {
+    return {
+        type: ADD_ACTION,
+        payload: action
+    }
+}

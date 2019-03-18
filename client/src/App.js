@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AppNavbar from './components/AppNavbar';
 import ActionList from './components/ActionList';
+import ActionModal from './components/ActionModal';
+import { Container } from 'reactstrap';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -14,7 +16,10 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <AppNavbar />
-          <ActionList />
+          <Container>
+            <ActionModal />
+            <ActionList />
+          </Container>
         </div>
       </Provider>
     );
