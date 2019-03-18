@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../../middleware/auth');
 
 // Action Model
 const Action = require('../../models/Action');
@@ -15,8 +16,8 @@ router.get('/', (req, res) => {
 
 // @route   POST api/actions
 // @desc    Create An Action
-// @access  Public
-router.post('/', (req, res) => {
+// @access  Private
+router.post('/', auth, (req, res) => {
     const newAction = new Action({
         type: req.body.type
     });
@@ -27,7 +28,7 @@ router.post('/', (req, res) => {
 // @route   DELETE api/actions/:id
 // @desc    Delete An Action
 // @access  Private
-router.delete('/:id', (req, res) => {
+router.delete('/:id', auth, (req, res) => {
     Action.findById(req.params.id)
     .then(action => action.remove()
     .then(() => res.json({
