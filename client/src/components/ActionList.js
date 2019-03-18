@@ -6,6 +6,11 @@ import { getActions, deleteAction } from '../actions/actionActions';
 import PropTypes from 'prop-types';
 
 class ActionList extends Component {
+    static propTypes = {
+        getActions: PropTypes.func.isRequired,
+        action: PropTypes.object.isRequired,
+        isAuthenticated: PropTypes.bool
+    }
 
     componentDidMount() {
         this.props.getActions();
@@ -24,12 +29,16 @@ class ActionList extends Component {
                         {actions.map(({ _id, type }) => (
                             <CSSTransition key={_id} timeout={500} classNames='fade'>
                                 <ListGroupItem>
-                                    <Button
+                                    { this.props.isAuthenticated ? (
+                                        <Button
                                         className="remove-btn"
                                         color="danger"
                                         size="sm"
                                         onClick={this.onDeleteClick.bind(this, _id)}
-                                    >&times;</Button>
+                                        >&times;</Button>
+                                    ) : (
+                                       null 
+                                    )}
                                     {type}
                                 </ListGroupItem>
                             </CSSTransition>
@@ -41,13 +50,9 @@ class ActionList extends Component {
     }
 }
 
-ActionList.propTypes = {
-    getActions: PropTypes.func.isRequired,
-    action: PropTypes.object.isRequired
-}
-
 const mapStateToProps = state => ({
-    action: state.action
+    action: state.action,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { getActions, deleteAction })(ActionList);

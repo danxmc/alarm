@@ -11,11 +11,16 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addAction } from '../actions/actionActions';
+import PropTypes from 'prop-types';
 
 class ActionModal extends Component {
     state = {
         modal: false,
         type: ''
+    }
+
+    static propTypes = {
+        isAuthenticated: PropTypes.bool
     }
 
     toggle = () => {
@@ -45,11 +50,15 @@ class ActionModal extends Component {
     render() {
         return(
             <div>
-                <Button
-                color="dark"
-                style={{marginBottom: '2rem'}}
-                onClick={this.toggle}
-                >Action</Button>
+                { this.props.isAuthenticated ? (
+                    <Button
+                    color="dark"
+                    style={{marginBottom: '2rem'}}
+                    onClick={this.toggle}
+                    >Alarm</Button>
+                ) : (
+                    <h4 className="mb-3 ml-4">Please Login to manage alarm</h4>
+                )}
 
                 <Modal
                 isOpen={this.state.modal}
@@ -81,7 +90,8 @@ class ActionModal extends Component {
 }
 
 const mapStateToProps = state => ({
-    action: state.action
+    action: state.action,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { addAction })(ActionModal);
