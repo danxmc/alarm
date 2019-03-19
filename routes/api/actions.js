@@ -19,7 +19,8 @@ router.get('/', (req, res) => {
 // @access  Private
 router.post('/', auth, (req, res) => {
     const newAction = new Action({
-        type: req.body.type
+        type: req.body.type,
+        User: req.body.User
     });
 
     newAction.save().then(action => res.json(action));

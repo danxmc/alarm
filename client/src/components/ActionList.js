@@ -26,7 +26,7 @@ class ActionList extends Component {
             <Container>
                 <ListGroup>
                     <TransitionGroup className='action-list'>
-                        {actions.map(({ _id, type }) => (
+                        { actions.map(({ _id, type }) => (
                             <CSSTransition key={_id} timeout={500} classNames='fade'>
                                 <ListGroupItem>
                                     { this.props.isAuthenticated ? (
@@ -37,7 +37,7 @@ class ActionList extends Component {
                                         onClick={this.onDeleteClick.bind(this, _id)}
                                         >&times;</Button>
                                     ) : (
-                                       null 
+                                       null
                                     )}
                                     {type}
                                 </ListGroupItem>

@@ -20,7 +20,8 @@ class ActionModal extends Component {
     }
 
     static propTypes = {
-        isAuthenticated: PropTypes.bool
+        isAuthenticated: PropTypes.bool,
+        user: PropTypes.object
     }
 
     toggle = () => {
@@ -35,9 +36,9 @@ class ActionModal extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-
         const newAction = {
-            type: this.state.type
+            type: this.state.type,
+            User: this.props.user._id || this.props.user.id
         }
 
         // Add action via addAction action
@@ -91,7 +92,8 @@ class ActionModal extends Component {
 
 const mapStateToProps = state => ({
     action: state.action,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
 });
 
 export default connect(mapStateToProps, { addAction })(ActionModal);
