@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { Container, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getActions, deleteAction } from '../actions/actionActions';
@@ -26,20 +26,25 @@ class ActionList extends Component {
             <Container>
                 <ListGroup>
                     <TransitionGroup className='action-list'>
-                        { actions.map(({ _id, type }) => (
+                        { actions.map(({ _id, type, date, User }) => (
                             <CSSTransition key={_id} timeout={500} classNames='fade'>
                                 <ListGroupItem>
-                                    { this.props.isAuthenticated ? (
-                                        <Button
-                                        className="remove-btn"
-                                        color="danger"
-                                        size="sm"
-                                        onClick={this.onDeleteClick.bind(this, _id)}
-                                        >&times;</Button>
-                                    ) : (
-                                       null
-                                    )}
-                                    {type}
+                                    <ListGroupItemHeading>
+                                        { this.props.isAuthenticated ? (
+                                            <Button
+                                            className="remove-btn"
+                                            color="danger"
+                                            size="sm"
+                                            onClick={this.onDeleteClick.bind(this, _id)}
+                                            >&times;</Button>
+                                        ) : (
+                                        null
+                                        )}
+                                        {type}
+                                    </ListGroupItemHeading>
+                                    <ListGroupItemText>
+                                        By <i>{User}</i> on {new Date(date).toLocaleString('es-MX', {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric'})}
+                                    </ListGroupItemText>
                                 </ListGroupItem>
                             </CSSTransition>
                         ))}
