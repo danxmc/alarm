@@ -39,6 +39,13 @@ class AppNavbar extends Component {
             <strong>{ user ? `Welcome ${user.name}` : '' }</strong>
           </span>
         </NavItem>
+        { user && user.role === "admin" ? (
+        <NavItem>
+          <RegisterModal />
+        </NavItem>
+        ) : (
+          ''
+        )}
         <NavItem>
           <Logout />
         </NavItem>
@@ -47,9 +54,6 @@ class AppNavbar extends Component {
 
     const guestLinks = (
       <Fragment>
-        <NavItem>
-          <RegisterModal />
-        </NavItem>
         <NavItem>
           <LoginModal />
         </NavItem>

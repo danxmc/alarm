@@ -9,7 +9,8 @@ class ActionList extends Component {
     static propTypes = {
         getActions: PropTypes.func.isRequired,
         action: PropTypes.object.isRequired,
-        isAuthenticated: PropTypes.bool
+        isAuthenticated: PropTypes.bool,
+        user: PropTypes.object
     }
 
     componentDidMount() {
@@ -30,7 +31,7 @@ class ActionList extends Component {
                             <CSSTransition key={_id} timeout={500} classNames='fade'>
                                 <ListGroupItem>
                                     <ListGroupItemHeading>
-                                        { this.props.isAuthenticated ? (
+                                        { this.props.isAuthenticated && this.props.user.role === 'admin' ? (
                                             <Button
                                             className="remove-btn"
                                             color="danger"
@@ -57,7 +58,8 @@ class ActionList extends Component {
 
 const mapStateToProps = state => ({
     action: state.action,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
 });
 
 export default connect(mapStateToProps, { getActions, deleteAction })(ActionList);
