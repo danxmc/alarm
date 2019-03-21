@@ -11,7 +11,7 @@ const Action = require('../../models/Action');
 // @access  Public
 router.get('/', (req, res) => {
     Action.find()
-    .populate('User')
+    .populate('User', 'name email role')
     .sort({
         date: -1
     }).then(actions => res.json(actions));
