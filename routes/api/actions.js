@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
+const circuit = require('../../circuit');
 
 // Action Model
 const Action = require('../../models/Action');
@@ -9,7 +10,9 @@ const Action = require('../../models/Action');
 // @desc    Get All Actions
 // @access  Public
 router.get('/', (req, res) => {
-    Action.find().sort({
+    Action.find()
+    .populate('User')
+    .sort({
         date: -1
     }).then(actions => res.json(actions));
 });
@@ -23,6 +26,7 @@ router.post('/', auth, (req, res) => {
         User: req.body.User
     });
 
+    circuit.emit('action', newAction.type);
     newAction.save().then(action => res.json(action));
 });
 

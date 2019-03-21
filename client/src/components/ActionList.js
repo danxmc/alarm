@@ -43,7 +43,7 @@ class ActionList extends Component {
                                         {type}
                                     </ListGroupItemHeading>
                                     <ListGroupItemText>
-                                        By <i>{User}</i> on {new Date(date).toLocaleString('es-MX', {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric'})}
+                                        By <i>{User.name}</i> on {new Date(date).toLocaleString('es-MX', {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric'})}
                                     </ListGroupItemText>
                                 </ListGroupItem>
                             </CSSTransition>
