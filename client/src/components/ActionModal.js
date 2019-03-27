@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {
     Button,
+    Container,
+    Row,
+    Col,
     Modal,
     ModalHeader,
     ModalBody,
@@ -59,13 +62,26 @@ class ActionModal extends Component {
         return(
             <div>
                 { this.props.isAuthenticated ? (
-                    <Button
-                    color="dark"
-                    style={{marginBottom: '2rem'}}
-                    onClick={this.toggle}
-                    >Alarm</Button>
+                    <Container>
+                        <Row>
+                            <Col xs={{ size: 4, offset: 4}}>
+                                <Button
+                                color="dark"
+                                size="lg"
+                                block
+                                onClick={this.toggle}
+                                >Alarm</Button>
+                            </Col>
+                        </Row>
+                    </Container>
                 ) : (
-                    <h4 className="mb-3 ml-4 text-center">Please Login to Manage Alarm</h4>
+                    <Container>
+                        <Row>
+                            <Col>
+                                <h4 className="mb-3 ml-4 text-center">Please Login to Manage Alarm</h4>
+                            </Col>
+                        </Row>
+                    </Container>
                 )}
 
                 <Modal
