@@ -9,7 +9,8 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "herouku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "herouku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "seed": "md-seed run --dropdb"
   },
   "author": "danx",
   "license": "MIT",
@@ -20,7 +21,8 @@
     "express": "^4.16.4",
     "johnny-five": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.4.20"
+    "mongoose": "^5.4.20",
+    "mongoose-data-seed": "^1.0.7"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

@@ -1,4 +1,5 @@
 {
     "mongoURI": "mongodb://localhost:27017/alarm",
-    "jwtSecret": "alarmSecret"
+    "jwtSecret": "alarmSecret",
+    "adminPass": "admin"
 }
