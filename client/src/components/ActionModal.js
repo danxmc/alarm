@@ -6,8 +6,8 @@ import {
     ModalBody,
     Form,
     FormGroup,
-    Label,
-    Input
+    // Label,
+    // Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addAction } from '../actions/actionActions';
@@ -34,13 +34,20 @@ class ActionModal extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    onClick = e => {
+        e.persist();
+        this.setState({ [e.target.name]: e.target.value }, () => {
+            this.onSubmit(e);
+        });
+    }
+
     onSubmit = e => {
         e.preventDefault();
         const newAction = {
             type: this.state.type,
             User: this.props.user._id || this.props.user.id
         }
-
+        
         // Add action via addAction action
         this.props.addAction(newAction);
 
@@ -58,29 +65,52 @@ class ActionModal extends Component {
                     onClick={this.toggle}
                     >Alarm</Button>
                 ) : (
-                    <h4 className="mb-3 ml-4">Please Login to manage alarm</h4>
+                    <h4 className="mb-3 ml-4 text-center">Please Login to Manage Alarm</h4>
                 )}
 
                 <Modal
                 isOpen={this.state.modal}
                 toggle={this.toggle}
                 >
-                    <ModalHeader toggle={this.toggle}>Acciones</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Actions</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="action">Action</Label>
+                                {/* <Label for="action">Action</Label>
                                 <Input
                                 type="text"
                                 name="type"
                                 id="action"
                                 placeholder="Activate/Deactivate"
                                 onChange={this.onChange}
-                                />
-                                <Button
+                                /> */}
+
+                                <div className="row">
+                                    <div className="col">
+                                        <Button
+                                        name="type"
+                                        value="Activate"
+                                        color="warning"
+                                        block
+                                        onClick={this.onClick}
+                                        >Activate</Button>
+                                    </div>
+
+                                    <div className="col">
+                                        <Button
+                                        name="type"
+                                        value="Deactivate"
+                                        color="danger"
+                                        block
+                                        onClick={this.onClick}
+                                        >Deactivate</Button>
+                                    </div>
+
+                                </div>
+                                {/* <Button
                                 color="dark"
                                 style={{marginTop: '2rem'}}
-                                block>Add Action</Button>
+                                block>Add Action</Button> */}
                             </FormGroup>
                         </Form>
                     </ModalBody>
