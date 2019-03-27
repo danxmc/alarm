@@ -1,5 +1,5 @@
 {
-    "mongoURI": "MONGOURI",
-    "jwtSecret": "JWTSECRET",
-    "adminPass": "SEEDER"
+    "mongoURI": "MongoURI",
+    "jwtSecret": "JWTSecret",
+    "adminPass": "Seeder"
 }
