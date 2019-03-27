@@ -27,7 +27,16 @@ router.post('/', auth, (req, res) => {
     });
 
     circuit.emit('action', newAction.type);
-    newAction.save().then(action => res.json(action));
+
+    newAction.save((err, action) => {
+        action
+        .populate('User', 'name email role')
+        .execPopulate()
+        .then(action => res.json(action))
+        .catch(err => res.status(500).json({
+            success: false
+        }));
+    });
 });
 
 // @route   DELETE api/actions/:id
