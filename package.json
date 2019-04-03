@@ -22,7 +22,8 @@
     "johnny-five": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.20",
-    "mongoose-data-seed": "^1.0.7"
+    "mongoose-data-seed": "^1.0.7",
+    "raspi-io": "^10.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

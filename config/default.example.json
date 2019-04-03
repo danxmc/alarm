@@ -1,5 +1,6 @@
 {
     "mongoURI": "MongoURI",
     "jwtSecret": "JWTSecret",
-    "adminPass": "Seeder"
+    "adminPass": "Seeder",
+    "board": "arduino"
 }
